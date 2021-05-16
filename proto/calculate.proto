@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+
+service CalculateService {
+  rpc CalculateSomething (CalculateSomethingRequest) returns (CalculateSomethingResponse) {}
+}
+
+message CalculateSomethingRequest {
+  repeated int32 numbers = 1;
+  OperationType operation_type = 2;
+  int32 divider = 3;
+
+}
+
+message CalculateSomethingResponse {
+  int32 result = 1;
+  OperationType operation_type = 2;
+}
+
+enum OperationType {
+  UNKNOWN = 0;
+  ADD = 1;
+  MUL = 2;
+}
