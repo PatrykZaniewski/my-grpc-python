@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0f\x63\x61lculate.proto\"e\n\x19\x43\x61lculateSomethingRequest\x12\x0f\n\x07numbers\x18\x01 \x03(\x05\x12&\n\x0eoperation_type\x18\x02 \x01(\x0e\x32\x0e.OperationType\x12\x0f\n\x07\x64ivider\x18\x03 \x01(\x05\"T\n\x1a\x43\x61lculateSomethingResponse\x12\x0e\n\x06result\x18\x01 \x01(\x05\x12&\n\x0eoperation_type\x18\x02 \x01(\x0e\x32\x0e.OperationType*.\n\rOperationType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03\x41\x44\x44\x10\x01\x12\x07\n\x03MUL\x10\x02\x32\x63\n\x10\x43\x61lculateService\x12O\n\x12\x43\x61lculateSomething\x12\x1a.CalculateSomethingRequest\x1a\x1b.CalculateSomethingResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x0f\x63\x61lculate.proto\"e\n\x19\x43\x61lculateSomethingRequest\x12\x0f\n\x07numbers\x18\x01 \x03(\x05\x12&\n\x0eoperation_type\x18\x02 \x01(\x0e\x32\x0e.OperationType\x12\x0f\n\x07\x64ivider\x18\x03 \x01(\x05\"\xf3\x02\n\x1a\x43\x61lculateSomethingResponse\x12S\n\x0cvalid_result\x18\x01 \x01(\x0b\x32;.CalculateSomethingResponse.CalculateSomethingResponseValidH\x00\x12W\n\x0einvalid_result\x18\x02 \x01(\x0b\x32=.CalculateSomethingResponse.CalculateSomethingResponseInvalidH\x00\x1aY\n\x1f\x43\x61lculateSomethingResponseValid\x12\x0e\n\x06result\x18\x01 \x01(\x05\x12&\n\x0eoperation_type\x18\x02 \x01(\x0e\x32\x0e.OperationType\x1a\x42\n!CalculateSomethingResponseInvalid\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0f\n\x07message\x18\x02 \x01(\tB\x08\n\x06result*.\n\rOperationType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03\x41\x44\x44\x10\x01\x12\x07\n\x03MUL\x10\x02\x32\x63\n\x10\x43\x61lculateService\x12O\n\x12\x43\x61lculateSomething\x12\x1a.CalculateSomethingRequest\x1a\x1b.CalculateSomethingResponse\"\x00\x62\x06proto3'
 )
 
 _OPERATIONTYPE = _descriptor.EnumDescriptor(
@@ -48,8 +48,8 @@ _OPERATIONTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=208,
-  serialized_end=254,
+  serialized_start=496,
+  serialized_end=542,
 )
 _sym_db.RegisterEnumDescriptor(_OPERATIONTYPE)
 
@@ -106,23 +106,23 @@ _CALCULATESOMETHINGREQUEST = _descriptor.Descriptor(
 )
 
 
-_CALCULATESOMETHINGRESPONSE = _descriptor.Descriptor(
-  name='CalculateSomethingResponse',
-  full_name='CalculateSomethingResponse',
+_CALCULATESOMETHINGRESPONSE_CALCULATESOMETHINGRESPONSEVALID = _descriptor.Descriptor(
+  name='CalculateSomethingResponseValid',
+  full_name='CalculateSomethingResponse.CalculateSomethingResponseValid',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='result', full_name='CalculateSomethingResponse.result', index=0,
+      name='result', full_name='CalculateSomethingResponse.CalculateSomethingResponseValid.result', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='operation_type', full_name='CalculateSomethingResponse.operation_type', index=1,
+      name='operation_type', full_name='CalculateSomethingResponse.CalculateSomethingResponseValid.operation_type', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -140,12 +140,103 @@ _CALCULATESOMETHINGRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=122,
-  serialized_end=206,
+  serialized_start=327,
+  serialized_end=416,
+)
+
+_CALCULATESOMETHINGRESPONSE_CALCULATESOMETHINGRESPONSEINVALID = _descriptor.Descriptor(
+  name='CalculateSomethingResponseInvalid',
+  full_name='CalculateSomethingResponse.CalculateSomethingResponseInvalid',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='code', full_name='CalculateSomethingResponse.CalculateSomethingResponseInvalid.code', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='message', full_name='CalculateSomethingResponse.CalculateSomethingResponseInvalid.message', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=418,
+  serialized_end=484,
+)
+
+_CALCULATESOMETHINGRESPONSE = _descriptor.Descriptor(
+  name='CalculateSomethingResponse',
+  full_name='CalculateSomethingResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='valid_result', full_name='CalculateSomethingResponse.valid_result', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='invalid_result', full_name='CalculateSomethingResponse.invalid_result', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CALCULATESOMETHINGRESPONSE_CALCULATESOMETHINGRESPONSEVALID, _CALCULATESOMETHINGRESPONSE_CALCULATESOMETHINGRESPONSEINVALID, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='result', full_name='CalculateSomethingResponse.result',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=123,
+  serialized_end=494,
 )
 
 _CALCULATESOMETHINGREQUEST.fields_by_name['operation_type'].enum_type = _OPERATIONTYPE
-_CALCULATESOMETHINGRESPONSE.fields_by_name['operation_type'].enum_type = _OPERATIONTYPE
+_CALCULATESOMETHINGRESPONSE_CALCULATESOMETHINGRESPONSEVALID.fields_by_name['operation_type'].enum_type = _OPERATIONTYPE
+_CALCULATESOMETHINGRESPONSE_CALCULATESOMETHINGRESPONSEVALID.containing_type = _CALCULATESOMETHINGRESPONSE
+_CALCULATESOMETHINGRESPONSE_CALCULATESOMETHINGRESPONSEINVALID.containing_type = _CALCULATESOMETHINGRESPONSE
+_CALCULATESOMETHINGRESPONSE.fields_by_name['valid_result'].message_type = _CALCULATESOMETHINGRESPONSE_CALCULATESOMETHINGRESPONSEVALID
+_CALCULATESOMETHINGRESPONSE.fields_by_name['invalid_result'].message_type = _CALCULATESOMETHINGRESPONSE_CALCULATESOMETHINGRESPONSEINVALID
+_CALCULATESOMETHINGRESPONSE.oneofs_by_name['result'].fields.append(
+  _CALCULATESOMETHINGRESPONSE.fields_by_name['valid_result'])
+_CALCULATESOMETHINGRESPONSE.fields_by_name['valid_result'].containing_oneof = _CALCULATESOMETHINGRESPONSE.oneofs_by_name['result']
+_CALCULATESOMETHINGRESPONSE.oneofs_by_name['result'].fields.append(
+  _CALCULATESOMETHINGRESPONSE.fields_by_name['invalid_result'])
+_CALCULATESOMETHINGRESPONSE.fields_by_name['invalid_result'].containing_oneof = _CALCULATESOMETHINGRESPONSE.oneofs_by_name['result']
 DESCRIPTOR.message_types_by_name['CalculateSomethingRequest'] = _CALCULATESOMETHINGREQUEST
 DESCRIPTOR.message_types_by_name['CalculateSomethingResponse'] = _CALCULATESOMETHINGRESPONSE
 DESCRIPTOR.enum_types_by_name['OperationType'] = _OPERATIONTYPE
@@ -159,11 +250,27 @@ CalculateSomethingRequest = _reflection.GeneratedProtocolMessageType('CalculateS
 _sym_db.RegisterMessage(CalculateSomethingRequest)
 
 CalculateSomethingResponse = _reflection.GeneratedProtocolMessageType('CalculateSomethingResponse', (_message.Message,), {
+
+  'CalculateSomethingResponseValid' : _reflection.GeneratedProtocolMessageType('CalculateSomethingResponseValid', (_message.Message,), {
+    'DESCRIPTOR' : _CALCULATESOMETHINGRESPONSE_CALCULATESOMETHINGRESPONSEVALID,
+    '__module__' : 'calculate_pb2'
+    # @@protoc_insertion_point(class_scope:CalculateSomethingResponse.CalculateSomethingResponseValid)
+    })
+  ,
+
+  'CalculateSomethingResponseInvalid' : _reflection.GeneratedProtocolMessageType('CalculateSomethingResponseInvalid', (_message.Message,), {
+    'DESCRIPTOR' : _CALCULATESOMETHINGRESPONSE_CALCULATESOMETHINGRESPONSEINVALID,
+    '__module__' : 'calculate_pb2'
+    # @@protoc_insertion_point(class_scope:CalculateSomethingResponse.CalculateSomethingResponseInvalid)
+    })
+  ,
   'DESCRIPTOR' : _CALCULATESOMETHINGRESPONSE,
   '__module__' : 'calculate_pb2'
   # @@protoc_insertion_point(class_scope:CalculateSomethingResponse)
   })
 _sym_db.RegisterMessage(CalculateSomethingResponse)
+_sym_db.RegisterMessage(CalculateSomethingResponse.CalculateSomethingResponseValid)
+_sym_db.RegisterMessage(CalculateSomethingResponse.CalculateSomethingResponseInvalid)
 
 
 
@@ -174,8 +281,8 @@ _CALCULATESERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=256,
-  serialized_end=355,
+  serialized_start=544,
+  serialized_end=643,
   methods=[
   _descriptor.MethodDescriptor(
     name='CalculateSomething',

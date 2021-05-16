@@ -9,12 +9,24 @@ message CalculateSomethingRequest {
   repeated int32 numbers = 1;
   OperationType operation_type = 2;
   int32 divider = 3;
-
 }
 
 message CalculateSomethingResponse {
-  int32 result = 1;
-  OperationType operation_type = 2;
+  message CalculateSomethingResponseValid {
+    int32 result = 1;
+    OperationType operation_type = 2;
+  }
+
+  message CalculateSomethingResponseInvalid {
+    int32 code = 1;
+    string message = 2;
+  }
+
+  oneof result {
+    CalculateSomethingResponseValid valid_result = 1;
+    CalculateSomethingResponseInvalid invalid_result = 2;
+  }
+
 }
 
 enum OperationType {
