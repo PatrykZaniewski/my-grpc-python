@@ -5,4 +5,4 @@ from one.grpcGen.hello_pb2_grpc import HelloServiceServicer
 class HelloService(HelloServiceServicer):
 
     def SayHello(self, request, context):
-        return HelloReply(message="abcdef")
+        return HelloReply(message=f'Hello {request.name}')

@@ -22,9 +22,12 @@ def run_hello():
 def run_calculate():
     stub = calculate_pb2_grpc.CalculateServiceStub(channel)
     response = stub.CalculateSomething(CalculateSomethingRequest(numbers=[1, 2, 3], divider=2, operation_type=None))
-    print("Greeter client received: ")
+    if response.WhichOneof("result") == 'valid_result':
+        print(f'Calculated result {response.valid_result.result}')
+    else:
+        print(f'Calculation error: {response.invalid_result.message}')
 
 
 if __name__ == '__main__':
-    # run_hello()
-    run_calculate()
+    run_hello()
+    # run_calculate()

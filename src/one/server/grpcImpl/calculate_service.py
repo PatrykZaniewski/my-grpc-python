@@ -25,12 +25,12 @@ class CalculateService(CalculateServiceServicer):
             for number in request.numbers:
                 result *= number
             return CalculateSomethingResponse(
-                valid_result=CalculateSomethingResponse.CalculateSomethingResponseValid(result=result / request.divider,
+                valid_result=CalculateSomethingResponse.CalculateSomethingResponseValid(result=int(result / request.divider),
                                                                                         operation_type=OperationType.MUL.value))
         elif request.operation_type in [OperationType.ADD.value, OperationType.UNKNOWN.value]:
             result = 0
             for number in request.numbers:
                 result += number
             return CalculateSomethingResponse(
-                valid_result=CalculateSomethingResponse.CalculateSomethingResponseValid(result=result / request.divider,
+                valid_result=CalculateSomethingResponse.CalculateSomethingResponseValid(result=int(result / request.divider),
                                                                                         operation_type=OperationType.ADD.value))
