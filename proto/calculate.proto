@@ -1,19 +1,21 @@
 syntax = "proto2";
 
+package calculate;
+
 service CalculateService {
   rpc CalculateSomething (CalculateSomethingRequest) returns (CalculateSomethingResponse);
 }
 
 message CalculateSomethingRequest {
   repeated int32 numbers = 1;
-  optional OperationType operation_type = 2 [default = MUL];
+  optional calculate.OperationType operation_type = 2 [default = MUL];
   required int32 divider = 3;
 }
 
 message CalculateSomethingResponse {
   message CalculateSomethingResponseValid {
     required int32 result = 1;
-    required OperationType operation_type = 2;
+    required calculate.OperationType operation_type = 2;
   }
 
   message CalculateSomethingResponseInvalid {

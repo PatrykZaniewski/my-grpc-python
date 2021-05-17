@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import calculate_stream_pb2 as calculate__stream__pb2
+import stream.grpcGen.calculate_stream_pb2 as calculate__stream__pb2
 
 
 class CalculateServiceStub(object):
@@ -15,7 +15,7 @@ class CalculateServiceStub(object):
             channel: A grpc.Channel.
         """
         self.CalculateSomething = channel.stream_stream(
-                '/CalculateService/CalculateSomething',
+                '/calculate_stream.CalculateService/CalculateSomething',
                 request_serializer=calculate__stream__pb2.CalculateSomethingRequest.SerializeToString,
                 response_deserializer=calculate__stream__pb2.CalculateSomethingResponse.FromString,
                 )
@@ -40,7 +40,7 @@ def add_CalculateServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'CalculateService', rpc_method_handlers)
+            'calculate_stream.CalculateService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -59,7 +59,7 @@ class CalculateService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_stream(request_iterator, target, '/CalculateService/CalculateSomething',
+        return grpc.experimental.stream_stream(request_iterator, target, '/calculate_stream.CalculateService/CalculateSomething',
             calculate__stream__pb2.CalculateSomethingRequest.SerializeToString,
             calculate__stream__pb2.CalculateSomethingResponse.FromString,
             options, channel_credentials,

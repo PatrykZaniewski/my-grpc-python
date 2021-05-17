@@ -18,13 +18,14 @@ grpc_server = grpc.aio.server()
 async def calculate(request):
     payload = request.json
     stub = calculate_stream_pb2_grpc.CalculateServiceStub(channel)
-    responses = await stub.CalculateSomething(create_messages(payload))
-    logging.info()
+    responses = stub.CalculateSomething(create_messages(payload))
+    pass
 
-    if response.WhichOneof("result") == 'valid_result':
-        return json(f'Calculated result using rest: {response.valid_result.result}')
-    else:
-        return json(f'Calculation error using rest: {response.invalid_result.message}')
+    # for response in responses:
+    #     if response.WhichOneof("result") == 'valid_result':
+    #         logging.info(f'Calculated result using rest: {response.valid_result.result}')
+    #     else:
+    #         logging.info(f'Calculation error using rest: {response.invalid_result.message}')
 
 
 async def create_messages(payload):
@@ -32,9 +33,11 @@ async def create_messages(payload):
     for request in payload.get('data'):
         messages.append(CalculateSomethingRequest(numbers=request.get('numbers'), divider=request.get('divider'),
                                   operation_type=request.get('operation_type')))
-    for message in messages:
-        print(f'Processing message, numbers = {message}')
-        yield message
+    print('abcd')
+    logging.info("Started streaming messages")
+    # for message in messages:
+    #     print(f'Processing message, numbers = {message}')
+    #     yield message
 
 
 
