@@ -17,7 +17,6 @@ grpc_server = grpc.aio.server()
 @app.route('/post', methods=['POST'])
 async def calculate(request):
     payload = request.json
-    print('abc')
     stub = calculate_pb2_grpc.CalculateServiceStub(channel)
     response = await stub.CalculateSomething(
             CalculateSomethingRequest(numbers=payload.get('numbers'), divider=payload.get('divider'),

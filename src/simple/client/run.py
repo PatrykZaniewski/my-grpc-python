@@ -29,5 +29,5 @@ def run_calculate():
 
 
 if __name__ == '__main__':
-    run_hello()
-    # run_calculate()
+    # run_hello()
+    run_calculate()

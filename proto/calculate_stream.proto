@@ -1,25 +1,24 @@
-syntax = "proto3";
-
+syntax = "proto2";
 
 service CalculateService {
-  rpc CalculateSomething (CalculateSomethingRequest) returns (CalculateSomethingResponse) {}
+  rpc CalculateSomething (CalculateSomethingRequest) returns (CalculateSomethingResponse);
 }
 
 message CalculateSomethingRequest {
   repeated int32 numbers = 1;
-  OperationType operation_type = 2;
-  int32 divider = 3;
+  optional OperationType operation_type = 2 [default = MUL];
+  required int32 divider = 3;
 }
 
 message CalculateSomethingResponse {
   message CalculateSomethingResponseValid {
-    int32 result = 1;
-    OperationType operation_type = 2;
+    required int32 result = 1;
+    required OperationType operation_type = 2;
   }
 
   message CalculateSomethingResponseInvalid {
-    int32 code = 1;
-    string message = 2;
+    required int32 code = 1;
+    optional string message = 2;
   }
 
   oneof result {
@@ -30,7 +29,6 @@ message CalculateSomethingResponse {
 }
 
 enum OperationType {
-  UNKNOWN = 0;
-  ADD = 1;
-  MUL = 2;
+  ADD = 0;
+  MUL = 1;
 }
