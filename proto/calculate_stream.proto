@@ -1,7 +1,7 @@
 syntax = "proto2";
 
 service CalculateService {
-  rpc CalculateSomething (CalculateSomethingRequest) returns (CalculateSomethingResponse);
+  rpc CalculateSomething (stream CalculateSomethingRequest) returns (stream CalculateSomethingResponse);
 }
 
 message CalculateSomethingRequest {

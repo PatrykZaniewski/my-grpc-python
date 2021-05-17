@@ -1,13 +1,13 @@
 import asyncio
-from concurrent import futures
+import logging
+
+import grpc
+from sanic import Sanic
 from sanic.response import json
 
-from sanic import Sanic
-import grpc
-
-from async_with_rest.grpcGen import calculate_pb2_grpc
-from async_with_rest.grpcGen.calculate_pb2 import CalculateSomethingRequest
-from async_with_rest.server.grpcImpl.calculate_service import CalculateService
+from stream.grpcGen import calculate_stream_pb2_grpc
+from stream.grpcGen.calculate_stream_pb2 import CalculateSomethingRequest
+from stream.server.grpcImpl.calculate_service import CalculateService
 
 app = Sanic("My Sanic app")
 channel = grpc.aio.insecure_channel('localhost:50051')
@@ -17,18 +17,29 @@ grpc_server = grpc.aio.server()
 @app.route('/post', methods=['POST'])
 async def calculate(request):
     payload = request.json
-    stub = calculate_pb2_grpc.CalculateServiceStub(channel)
-    response = await stub.CalculateSomething(
-            CalculateSomethingRequest(numbers=payload.get('numbers'), divider=payload.get('divider'),
-                                    operation_type=payload.get('operation_type')))
+    stub = calculate_stream_pb2_grpc.CalculateServiceStub(channel)
+    responses = await stub.CalculateSomething(create_messages(payload))
+    logging.info()
+
     if response.WhichOneof("result") == 'valid_result':
         return json(f'Calculated result using rest: {response.valid_result.result}')
     else:
         return json(f'Calculation error using rest: {response.invalid_result.message}')
 
 
+async def create_messages(payload):
+    messages = []
+    for request in payload.get('data'):
+        messages.append(CalculateSomethingRequest(numbers=request.get('numbers'), divider=request.get('divider'),
+                                  operation_type=request.get('operation_type')))
+    for message in messages:
+        print(f'Processing message, numbers = {message}')
+        yield message
+
+
+
 async def serve():
-    calculate_pb2_grpc.add_CalculateServiceServicer_to_server(CalculateService(), grpc_server)
+    calculate_stream_pb2_grpc.add_CalculateServiceServicer_to_server(CalculateService(), grpc_server)
     grpc_server.add_insecure_port('[::]:50052')
     await grpc_server.start()
     await grpc_server.wait_for_termination()

@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import stream.grpcGen.calculate_pb2 as calculate__pb2
+import calculate_stream_pb2 as calculate__stream__pb2
 
 
 class CalculateServiceStub(object):
@@ -14,17 +14,17 @@ class CalculateServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.CalculateSomething = channel.unary_unary(
+        self.CalculateSomething = channel.stream_stream(
                 '/CalculateService/CalculateSomething',
-                request_serializer=calculate__pb2.CalculateSomethingRequest.SerializeToString,
-                response_deserializer=calculate__pb2.CalculateSomethingResponse.FromString,
+                request_serializer=calculate__stream__pb2.CalculateSomethingRequest.SerializeToString,
+                response_deserializer=calculate__stream__pb2.CalculateSomethingResponse.FromString,
                 )
 
 
 class CalculateServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def CalculateSomething(self, request, context):
+    def CalculateSomething(self, request_iterator, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -33,10 +33,10 @@ class CalculateServiceServicer(object):
 
 def add_CalculateServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'CalculateSomething': grpc.unary_unary_rpc_method_handler(
+            'CalculateSomething': grpc.stream_stream_rpc_method_handler(
                     servicer.CalculateSomething,
-                    request_deserializer=calculate__pb2.CalculateSomethingRequest.FromString,
-                    response_serializer=calculate__pb2.CalculateSomethingResponse.SerializeToString,
+                    request_deserializer=calculate__stream__pb2.CalculateSomethingRequest.FromString,
+                    response_serializer=calculate__stream__pb2.CalculateSomethingResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -49,7 +49,7 @@ class CalculateService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def CalculateSomething(request,
+    def CalculateSomething(request_iterator,
             target,
             options=(),
             channel_credentials=None,
@@ -59,8 +59,8 @@ class CalculateService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/CalculateService/CalculateSomething',
-            calculate__pb2.CalculateSomethingRequest.SerializeToString,
-            calculate__pb2.CalculateSomethingResponse.FromString,
+        return grpc.experimental.stream_stream(request_iterator, target, '/CalculateService/CalculateSomething',
+            calculate__stream__pb2.CalculateSomethingRequest.SerializeToString,
+            calculate__stream__pb2.CalculateSomethingResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

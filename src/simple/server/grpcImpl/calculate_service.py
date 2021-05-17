@@ -5,9 +5,8 @@ from simple.grpcGen.calculate_pb2_grpc import CalculateServiceServicer
 
 
 class OperationType(Enum):
-    UNKNOWN = 0
-    ADD = 1
-    MUL = 2
+    ADD = 0
+    MUL = 1
 
 
 class CalculateService(CalculateServiceServicer):
@@ -24,13 +23,10 @@ class CalculateService(CalculateServiceServicer):
             result = 1
             for number in request.numbers:
                 result *= number
-            return CalculateSomethingResponse(
-                valid_result=CalculateSomethingResponse.CalculateSomethingResponseValid(result=int(result / request.divider),
-                                                                                        operation_type=OperationType.MUL.value))
         elif request.operation_type in [OperationType.ADD.value, OperationType.UNKNOWN.value]:
             result = 0
             for number in request.numbers:
                 result += number
-            return CalculateSomethingResponse(
-                valid_result=CalculateSomethingResponse.CalculateSomethingResponseValid(result=int(result / request.divider),
-                                                                                        operation_type=OperationType.ADD.value))
+
+        return CalculateSomethingResponse(valid_result=CalculateSomethingResponse.CalculateSomethingResponseValid(
+            result=int(result / request.divider), operation_type=request.operation_type))
