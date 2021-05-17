@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import one.grpcGen.calculate_pb2 as calculate__pb2
+import simple.grpcGen.calculate_pb2 as calculate__pb2
 
 
 class CalculateServiceStub(object):

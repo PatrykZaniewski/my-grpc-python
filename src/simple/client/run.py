@@ -2,8 +2,8 @@ from enum import Enum
 
 import grpc
 
-from one.grpcGen import hello_pb2_grpc, hello_pb2, calculate_pb2_grpc
-from one.grpcGen.calculate_pb2 import CalculateSomethingRequest
+from simple.grpcGen import hello_pb2_grpc, hello_pb2, calculate_pb2_grpc
+from simple.grpcGen.calculate_pb2 import CalculateSomethingRequest
 
 channel = grpc.insecure_channel('localhost:50051')
 

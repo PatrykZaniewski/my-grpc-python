@@ -1,5 +1,5 @@
-from one.grpcGen.hello_pb2 import HelloReply
-from one.grpcGen.hello_pb2_grpc import HelloServiceServicer
+from simple.grpcGen.hello_pb2 import HelloReply
+from simple.grpcGen.hello_pb2_grpc import HelloServiceServicer
 
 
 class HelloService(HelloServiceServicer):

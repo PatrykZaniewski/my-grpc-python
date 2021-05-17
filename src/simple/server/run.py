@@ -2,9 +2,9 @@ from concurrent import futures
 
 import grpc
 
-from one.grpcGen import calculate_pb2_grpc, hello_pb2_grpc
-from one.server.grpcImpl.calculate_service import CalculateService
-from one.server.grpcImpl.hello_service import HelloService
+from simple.grpcGen import calculate_pb2_grpc, hello_pb2_grpc
+from simple.server.grpcImpl.calculate_service import CalculateService
+from simple.server.grpcImpl.hello_service import HelloService
 
 
 def serve():

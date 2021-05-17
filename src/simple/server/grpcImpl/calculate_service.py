@@ -1,7 +1,7 @@
 from enum import Enum
 
-from one.grpcGen.calculate_pb2 import CalculateSomethingResponse, CalculateSomethingRequest
-from one.grpcGen.calculate_pb2_grpc import CalculateServiceServicer
+from simple.grpcGen.calculate_pb2 import CalculateSomethingResponse, CalculateSomethingRequest
+from simple.grpcGen.calculate_pb2_grpc import CalculateServiceServicer
 
 
 class OperationType(Enum):
