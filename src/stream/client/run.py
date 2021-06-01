@@ -1,5 +1,6 @@
 import asyncio
 import logging
+from concurrent.futures import ThreadPoolExecutor
 
 import grpc
 from sanic import Sanic
@@ -17,10 +18,16 @@ grpc_server = grpc.aio.server()
 @app.route('/post', methods=['POST'])
 async def calculate(request):
     payload = request.json
-    stub = calculate_stream_pb2_grpc.CalculateServiceStub(channel)
-    responses = stub.CalculateSomething(create_messages(payload))
-    pass
 
+    executor = ThreadPoolExecutor()
+    future = executor.submit(process_stream, executor, channel,
+                                 "555-0100-XXXX")
+    future.result()
+
+    request = phone_pb2.StreamCallRequest()
+    request.phone_number = self._phone_number
+    response_iterator = self._stub.StreamCall(iter(await create_messages(payload)))
+    executor.submit()
     # for response in responses:
     #     if response.WhichOneof("result") == 'valid_result':
     #         logging.info(f'Calculated result using rest: {response.valid_result.result}')
@@ -28,17 +35,18 @@ async def calculate(request):
     #         logging.info(f'Calculation error using rest: {response.invalid_result.message}')
 
 
+async def process_stream(messages):
+
+
 async def create_messages(payload):
     messages = []
     for request in payload.get('data'):
         messages.append(CalculateSomethingRequest(numbers=request.get('numbers'), divider=request.get('divider'),
                                   operation_type=request.get('operation_type')))
-    print('abcd')
-    logging.info("Started streaming messages")
+    return messages
     # for message in messages:
     #     print(f'Processing message, numbers = {message}')
     #     yield message
-
 
 
 async def serve():
@@ -49,6 +57,10 @@ async def serve():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(
+        format='%(asctime)s %(levelname)-8s %(message)s',
+        level=logging.INFO,
+        datefmt='%Y-%m-%d %H:%M:%S')
     server = app.create_server("0.0.0.0", port=8000, return_asyncio_server=True)
     loop = asyncio.get_event_loop()
     task_sanic = asyncio.ensure_future(server)
